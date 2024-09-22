@@ -41,6 +41,7 @@ def main():
         # 构造 ffmpeg 命令：将音频合成到视频中
         ffmpeg_cmd = [
             "ffmpeg", 
+            '-y',
             "-i", video_path,  # 输入视频
             "-i", audio_path,  # 输入音频
             "-c:v", "copy",    # 保持原始视频编码
@@ -54,7 +55,8 @@ def main():
         status_text = st.empty()       # 状态文本
         
         # 运行命令，捕获输出
-        process = subprocess.Popen(ffmpeg_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+        process = subprocess.Popen(ffmpeg_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True,
+                                   encoding='utf-8')
 
         # 更新进度条
         while True:
